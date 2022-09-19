@@ -6,12 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.marcospb.marvelapp.R
+import com.marcospb.marvelapp.databinding.FragmentDetailCharacterBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class DetailCharacterFragment : Fragment() {
 
 
-    //private val _binder
+    private lateinit var binding: FragmentDetailCharacterBinding
+
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,9 +28,16 @@ class DetailCharacterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        return inflater.inflate(R.layout.fragment_detail_character, container, false)
+        binding = FragmentDetailCharacterBinding.inflate(layoutInflater)
+        return binding.root
     }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }
+
 
     companion object {
 

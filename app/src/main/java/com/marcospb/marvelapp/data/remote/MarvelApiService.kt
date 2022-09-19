@@ -15,7 +15,8 @@ interface MarvelApiService {
         @Query("ts") timestamp: String,
         @Query("hash") hash: String,
         @Query("limit") limit: Int = ITEM_LIMIT,
-        @Query("offset") offset: Int
+        @Query("offset") offset: Int,
+        @Query("orderBy") orderBy: String = "name"
     ): Response<ResponseCharacterList>
 
 }

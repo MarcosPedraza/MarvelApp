@@ -1,5 +1,6 @@
 package com.marcospb.marvelapp.ui.list_character.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -26,27 +27,41 @@ class CharacterListViewModel @Inject constructor(private val repository: Charact
     val characterListLivedata = _characterListLivedata
 
 
+    private val _onErrorListener: MutableLiveData<String> = MutableLiveData()
+    val onErrorListener = _onErrorListener
+
+
     fun getCharacterList() {
         viewModelScope.launch(Dispatchers.IO) {
             val offset = currentOffset ?: 0
             try {
                 val list = repository.getCharacterList(offset)
                 if (list.isSuccessful) {
-                    list.body()?.data?.results?.let {
-                        characterList.addAll(it)
-                        _characterListLivedata.postValue(characterList)
+                    list.body()?.data?.results?.let { value ->
+                        characterList.addAll(value)
+                        _characterListLivedata.postValue(characterList.toList())
                     }
 
-                    var offsetValue = list.body()?.data?.offset?.plus(1)
+                    val offsetValue = list.body()?.data?.offset?.plus(1)
                     offsetValue?.let {
                         currentOffset = it
                     }
+                } else {
+                    val error = list.errorBody().toString()
+                    Log.e("Error", "$error")
+                    _onErrorListener.postValue(error)
                 }
 
             } catch (ex: Exception) {
-
+                _onErrorListener.postValue("Error: ${ex.message}")
             }
         }
+    }
+
+    fun getCharacterDetail(characterId: Int) {
+
+
+
     }
 
 

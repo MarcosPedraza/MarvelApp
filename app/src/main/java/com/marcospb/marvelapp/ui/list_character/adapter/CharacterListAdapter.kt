@@ -1,11 +1,13 @@
 package com.marcospb.marvelapp.ui.list_character.adapter
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.marcospb.marvelapp.R
 import com.marcospb.marvelapp.data.model.CharacterItem
 import com.marcospb.marvelapp.databinding.ItemCharacterBinding
 
@@ -14,11 +16,14 @@ class CharacterListAdapter(private val onCharacterClick: (character: CharacterIt
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
-        TODO("Not yet implemented")
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_character, parent, false)
+        return CharacterViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val currentItem = getItem(position)
+        holder.bind(currentItem)
     }
 
 
@@ -34,6 +39,7 @@ class CharacterListAdapter(private val onCharacterClick: (character: CharacterIt
         fun bind(item: CharacterItem) {
             Glide.with(itemView.context)
                 .load("${item.thumbnail?.path}.${item.thumbnail?.extension}")
+                .placeholder(R.drawable.ic_hide_image)
                 .into(binding.imageView)
             binding.name.text = item.name
 

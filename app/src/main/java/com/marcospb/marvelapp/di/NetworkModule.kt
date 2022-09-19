@@ -41,6 +41,7 @@ object NetworkModule {
     fun providesMarvelService(httpClient: OkHttpClient): MarvelApiService {
         return Retrofit.Builder()
             .client(httpClient)
+            .baseUrl(BuildConfig.API_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(MarvelApiService::class.java)

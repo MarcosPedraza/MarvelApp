@@ -22,4 +22,8 @@ object StringUtils {
         }
 
     }
+
+    fun String.md5(): String =
+        BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteArray()))
+            .toString(16).padStart(32, '0')
 }
