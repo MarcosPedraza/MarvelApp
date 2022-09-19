@@ -21,7 +21,7 @@ class CharacterListViewModel @Inject constructor(private val repository: Charact
 
 
     private var currentOffset: Int? = null
-    private val characterList = mutableListOf<CharacterItem>()
+    val characterList = mutableListOf<CharacterItem>()
 
     private val _characterListLivedata: MutableLiveData<List<CharacterItem>> = MutableLiveData()
     val characterListLivedata = _characterListLivedata

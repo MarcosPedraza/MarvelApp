@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.marcospb.marvelapp.R
 import com.marcospb.marvelapp.databinding.FragmentListCharacterBinding
@@ -54,9 +55,22 @@ class ListCharacterFragment : Fragment() {
         })
     }
 
+    override fun onPause() {
+        super.onPause()
+        viewModel.characterList.clear()
+    }
+
     private fun initAdapters() {
 
         characterAdapter = CharacterListAdapter {
+            val dir = it.id?.let { it1 ->
+                ListCharacterFragmentDirections.actionListCharacterFragmentToDetailCharacterFragment(
+                    it1
+                )
+            }
+
+            dir?.let { it1 -> findNavController().navigate(it1) }
+
 
         }
         binding.rvCharacters.layoutManager = LinearLayoutManager(requireContext())

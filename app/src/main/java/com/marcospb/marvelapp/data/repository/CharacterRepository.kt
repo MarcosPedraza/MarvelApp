@@ -1,6 +1,7 @@
 package com.marcospb.marvelapp.data.repository
 
 import com.marcospb.marvelapp.BuildConfig
+import com.marcospb.marvelapp.data.model.CharacterDetailResponse
 import com.marcospb.marvelapp.data.model.Data
 import com.marcospb.marvelapp.data.model.ResponseCharacterList
 import com.marcospb.marvelapp.data.remote.MarvelApiService
@@ -12,6 +13,13 @@ import java.time.LocalTime
 import java.util.*
 import javax.inject.Inject
 
+
+/**
+ * Character repository
+ *
+ * @property apiService Api service interface
+ * @constructor Create Character repository
+ */
 class CharacterRepository @Inject constructor(private val apiService: MarvelApiService) {
 
 
@@ -25,4 +33,18 @@ class CharacterRepository @Inject constructor(private val apiService: MarvelApiS
             offset = offset
         )
     }
+
+
+    suspend fun getCharacterDetail(characterId: Int): Response<CharacterDetailResponse> {
+        val ts = System.currentTimeMillis()
+        val hash = "$ts${BuildConfig.PRIVATE_API_KEY}${BuildConfig.API_KEY}".md5()
+
+        return apiService.getCharacterDetailById(
+            idCharacter = characterId,
+            BuildConfig.API_KEY,
+            timestamp = ts.toString(),
+            hash,
+        )
+    }
+
 }

@@ -32,8 +32,12 @@ class CharacterListAdapter(private val onCharacterClick: (character: CharacterIt
 
 
         init {
-
-
+            binding.root.setOnClickListener {
+                if (adapterPosition != RecyclerView.NO_POSITION) {
+                    val item = getItem(adapterPosition)
+                    onCharacterClick(item)
+                }
+            }
         }
 
         fun bind(item: CharacterItem) {

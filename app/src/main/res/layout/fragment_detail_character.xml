@@ -11,30 +11,30 @@
         android:id="@+id/character_Image"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.35"
         app:layout_constraintStart_toStartOf="parent"
-        android:scaleType="centerCrop"
-        app:layout_constraintHeight_percent="0.30"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:orientation="horizontal"
         android:background="@drawable/bg_name_gradient"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/character_Image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/character_name"
             android:layout_width="wrap_content"
-            android:textColor="@color/primaryTextColor"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="8dp"
             android:textAllCaps="true"
+            android:textColor="@color/primaryTextColor"
             android:textSize="18sp"
             android:textStyle="bold"
             tools:text="SPIDERMAN" />
@@ -60,7 +60,10 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="DESCRIPTION"
+                android:text="@string/description_title"
+                android:textAllCaps="true"
+                android:textColor="@color/primaryLightColor"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -80,18 +83,33 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="TextView"
+                android:text="@string/stories"
+                android:textAllCaps="true"
+                android:textColor="@color/primaryLightColor"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/description"
                 app:layout_constraintStart_toStartOf="@+id/description"
                 app:layout_constraintTop_toBottomOf="@+id/description" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_stories"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView4"
+                app:spanCount="3"
+                tools:listitem="@layout/item_history" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </ScrollView>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

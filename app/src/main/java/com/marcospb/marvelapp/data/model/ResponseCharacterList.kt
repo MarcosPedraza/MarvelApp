@@ -38,7 +38,7 @@ data class Stories(
     val returned: Int? = null,
 
     @field:SerializedName("items")
-    val items: List<ItemsItem?>? = null
+    val items: List<StoryItem?>? = null
 )
 
 data class Events(
@@ -53,7 +53,7 @@ data class Events(
     val returned: Int? = null,
 
     @field:SerializedName("items")
-    val items: List<ItemsItem?>? = null
+    val items: List<StoryItem?>? = null
 )
 
 data class Thumbnail(
@@ -74,7 +74,7 @@ data class UrlsItem(
     val url: String? = null
 )
 
-data class ItemsItem(
+data class StoryItem(
 
     @field:SerializedName("name")
     val name: String? = null,
@@ -152,7 +152,7 @@ data class Series(
     val returned: Int? = null,
 
     @field:SerializedName("items")
-    val items: List<ItemsItem?>? = null
+    val items: List<StoryItem?>? = null
 )
 
 data class Comics(
@@ -167,5 +167,5 @@ data class Comics(
     val returned: Int? = null,
 
     @field:SerializedName("items")
-    val items: List<ItemsItem?>? = null
+    val items: List<StoryItem?>? = null
 )
